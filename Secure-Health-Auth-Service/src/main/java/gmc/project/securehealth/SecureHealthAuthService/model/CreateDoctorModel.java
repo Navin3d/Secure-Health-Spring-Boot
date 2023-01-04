@@ -8,9 +8,9 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class DoctorModel implements Serializable {
+public class CreateDoctorModel implements Serializable {
 	
-	private static final long serialVersionUID = -8298720988481970633L;
+	private static final long serialVersionUID = 4789045830823590385L;
 	
 	private String id;
 	
@@ -23,8 +23,10 @@ public class DoctorModel implements Serializable {
 	private String email;
 	
 	private String registrationId;
-		
-	private List<DegreeModel> qualifications = new ArrayList<>();
+	
+	private String password;
+	
+	private List<String> qualificationsId = new ArrayList<>();
 	
 	private Integer yearsOfExperience;
 		

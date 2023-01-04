@@ -29,6 +29,8 @@ public class DoctorEntity implements Serializable {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 	
+	private String ranking;
+	
 	private String firstName;
 	
 	private String lastName;
@@ -40,7 +42,7 @@ public class DoctorEntity implements Serializable {
 	private String registrationId;
 	
 	private String encryptedPassword;
-	
+		
 	@ManyToMany(mappedBy = "doctor", cascade = CascadeType.PERSIST)
 	private Set<DegreeEntity> qualifications = new HashSet<>();
 	

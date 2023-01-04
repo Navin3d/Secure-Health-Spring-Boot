@@ -1,7 +1,6 @@
 package gmc.project.securehealth.SecureHealthAuthService.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 import lombok.Data;
 
@@ -22,6 +21,6 @@ public class PatientModel implements Serializable {
 	
 	private String password;
 		
-	private LocalDate dateOfBirth;
+	private String dateOfBirthText;
 
 }

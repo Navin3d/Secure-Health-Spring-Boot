@@ -27,6 +27,12 @@ public class DiseaseEntity implements Serializable {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 	
+	private String title;
+	
+	private String description;
+	
+	private String detailedDescription;
+	
 	private DiseaseType diseaseType;
 	
 	@ManyToMany

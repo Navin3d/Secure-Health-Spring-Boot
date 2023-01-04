@@ -1,6 +1,10 @@
 package gmc.project.securehealth.SecureHealthAuthService.services.impl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -11,10 +15,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import gmc.project.securehealth.SecureHealthAuthService.daos.DegreeDao;
 import gmc.project.securehealth.SecureHealthAuthService.daos.DoctorDao;
 import gmc.project.securehealth.SecureHealthAuthService.daos.PatientDao;
+import gmc.project.securehealth.SecureHealthAuthService.entities.DegreeEntity;
 import gmc.project.securehealth.SecureHealthAuthService.entities.DoctorEntity;
 import gmc.project.securehealth.SecureHealthAuthService.entities.PatientEntity;
+import gmc.project.securehealth.SecureHealthAuthService.model.CreateDoctorModel;
 import gmc.project.securehealth.SecureHealthAuthService.model.DoctorModel;
 import gmc.project.securehealth.SecureHealthAuthService.model.PatientModel;
 import gmc.project.securehealth.SecureHealthAuthService.services.AuthService;
@@ -28,6 +35,8 @@ public class AuthServiceImpl implements AuthService {
 	private PatientDao patientDao;
 	@Autowired
 	private DoctorDao doctorDao;
+	@Autowired
+	private DegreeDao degreeDao;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -60,8 +69,17 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public void createDoctor(DoctorModel doctorModel) {
-		
+	public void createDoctor(CreateDoctorModel createDoctorModel) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		DoctorEntity detachedDoctor = modelMapper.map(createDoctorModel, DoctorEntity.class);
+		detachedDoctor.setEncryptedPassword(bCryptPasswordEncoder.encode(createDoctorModel.getPassword()));
+		Set<DegreeEntity> qualifications = new HashSet<>();
+		detachedDoctor.getQualifications().stream().iterator().forEachRemaining(degree -> {
+			qualifications.add(degreeDao.findById(degree.getId()).get());
+		});
+		detachedDoctor.setQualifications(qualifications);
+		doctorDao.save(detachedDoctor);
 	}
 
 	@Override
@@ -70,9 +88,11 @@ public class AuthServiceImpl implements AuthService {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		PatientEntity detached = modelMapper.map(patientModel, PatientEntity.class);
 		detached.setEncryptedPassword(bCryptPasswordEncoder.encode(patientModel.getPassword()));
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate dob = LocalDate.parse(patientModel.getDateOfBirthText(), dateFormatter);
+		detached.setDateOfBirth(dob);
 		patientDao.save(detached);
-	}
-	
+	}	
 	
 
 }
