@@ -13,9 +13,11 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import gmc.project.securehealth.SecureHealthAuthService.model.DiseaseType;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "diseases")
 public class DiseaseEntity implements Serializable {

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.modelmapper.ModelMapper;
@@ -75,11 +76,18 @@ public class AuthServiceImpl implements AuthService {
 		DoctorEntity detachedDoctor = modelMapper.map(createDoctorModel, DoctorEntity.class);
 		detachedDoctor.setEncryptedPassword(bCryptPasswordEncoder.encode(createDoctorModel.getPassword()));
 		Set<DegreeEntity> qualifications = new HashSet<>();
-		detachedDoctor.getQualifications().stream().iterator().forEachRemaining(degree -> {
-			qualifications.add(degreeDao.findById(degree.getId()).get());
+		createDoctorModel.getQualificationsId().forEach(degree -> {
+			qualifications.add(degreeDao.findById(degree).get());
 		});
 		detachedDoctor.setQualifications(qualifications);
-		doctorDao.save(detachedDoctor);
+		log.info(qualifications.toString());
+		DoctorEntity saved = doctorDao.save(detachedDoctor);
+		List<DegreeEntity> degrees = new ArrayList<>();
+		qualifications.forEach(degree -> {
+			degree.getDoctor().add(saved);
+			degrees.add(degree);
+		});
+		degreeDao.saveAll(degrees);
 	}
 
 	@Override

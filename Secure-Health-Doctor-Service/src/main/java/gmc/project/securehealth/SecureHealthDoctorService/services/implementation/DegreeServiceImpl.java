@@ -66,17 +66,24 @@ public class DegreeServiceImpl implements gmc.project.securehealth.SecureHealthD
 	public DegreeCreationModel save(DegreeCreationModel degreeModel) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		DegreeEntity savedDegree = new DegreeEntity();
+//		DegreeEntity savedDegree = new DegreeEntity();
 		if(degreeModel.getId() == null) {
-			savedDegree = modelMapper.map(degreeModel, DegreeEntity.class);
+			DegreeEntity detachedDegree = modelMapper.map(degreeModel, DegreeEntity.class);
 			Set<DiseaseEntity> diseaseTreatable = new HashSet<>();
 			degreeModel.getDiseasesTreatable().forEach(disease -> {
 				DiseaseEntity foundDisease = diseaseDao.findById(disease.getId()).get();
 				diseaseTreatable.add(foundDisease);
 			});
-			savedDegree.setDiseasesTreatable(diseaseTreatable);
-			savedDegree = degreeDao.save(savedDegree);
-		} else {
+			detachedDegree.setDiseasesTreatable(diseaseTreatable);
+			DegreeEntity savedDegree = degreeDao.save(detachedDegree);
+			List<DiseaseEntity> diseases = new ArrayList<>();
+			diseaseTreatable.forEach(disease -> {
+				disease.getDegrees().add(savedDegree);
+			});
+			diseaseDao.saveAll(diseases);
+			DegreeCreationModel returnValue = modelMapper.map(savedDegree, DegreeCreationModel.class);
+			return returnValue;
+ 		} else {
 			DegreeEntity foundDegree = degreeDao.findById(degreeModel.getId()).get();
 			foundDegree.setTitle(degreeModel.getTitle());
 			foundDegree.setDescription(degreeModel.getDescription());
@@ -86,10 +93,15 @@ public class DegreeServiceImpl implements gmc.project.securehealth.SecureHealthD
 				diseaseTreatable.add(foundDisease);
 			});
 			foundDegree.setDiseasesTreatable(diseaseTreatable);
-			savedDegree = degreeDao.save(foundDegree);
+			DegreeEntity savedDegree = degreeDao.save(foundDegree);
+			List<DiseaseEntity> diseases = new ArrayList<>();
+			diseaseTreatable.forEach(disease -> {
+				disease.getDegrees().add(savedDegree);
+			});
+			diseaseDao.saveAll(diseases);
+			DegreeCreationModel returnValue = modelMapper.map(savedDegree, DegreeCreationModel.class);
+			return returnValue;
 		}
-		DegreeCreationModel returnValue = modelMapper.map(savedDegree, DegreeCreationModel.class);
-		return returnValue;
 	}
 
 	@Override
