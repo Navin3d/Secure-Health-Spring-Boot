@@ -1,4 +1,4 @@
-package gmc.project.securehealth.SecureHealthAuthService.entities;
+package gmc.project.securehealth.SecureHealthDoctorService.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -19,23 +19,23 @@ import lombok.Data;
 @Entity
 @Table(name = "degrees")
 public class DegreeEntity implements Serializable {
-
+	
 	private static final long serialVersionUID = -1735849734801046153L;
-
+	
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
-
+	
 	private String title;
-
+	
 	private String specialization;
-
+		
 	private String description;
-
+	
 	@ManyToMany(mappedBy = "degrees", cascade = CascadeType.PERSIST)
 	private Set<DiseaseEntity> diseasesTreatable = new HashSet<>();
-
+	
 	@ManyToMany
 	private Set<DoctorEntity> doctor = new HashSet<>();
 

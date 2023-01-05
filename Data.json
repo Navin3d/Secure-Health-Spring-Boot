@@ -1,0 +1,72 @@
+{
+    "patient": [
+        {
+            "firstName": "Naveen",
+            "lastName": "Kumar",
+            "mobileNumber": "+919962527028",
+            "email": "naveenkumarpes2018@gmail.com",
+            "password": "imsamantha",
+            "dateOfBirthText": "2002-07-21"
+        }
+    ],
+    "disease": [
+        {
+            "title": "Coronavirus",
+            "description": "COVID-19 is caused by the SARS-CoV-2 virus",
+            "detailedDescription": "COVID-19 can cause mild to severe respiratory illness, including death. The best preventive measures include getting vaccinated",
+            "diseaseType": "GENERALMEDICINE"
+        },
+        {
+            "title": "Common Cold",
+            "description": "The common cold is an infection of your nose and throat.",
+            "detailedDescription": "More than 200 different viruses can cause colds. There’s no cure for a common cold, but it typically runs its course in a week to 10 days.",
+            "diseaseType": "GENERALMEDICINE"
+        }
+    ],
+    "degree": [
+        {
+            "title": "MBBS",
+            "specialization": "General Medicine",
+            "description": "Bachelor of Medicine and Bachelor of Surgery",
+            "diseasesTreatable": [
+                {
+                    "id": "7dd47e07-e215-4928-82e4-6b43d3bfdb8e"
+                }
+            ]
+        }
+    ],
+    "doctor": {
+        "add": [
+            {
+                "firstName": "Ajith",
+                "lastName": "Ram",
+                "mobileNumber": "+917708827461",
+                "email": "drpajithram@gmail.com",
+                "registrationId": "DOC-000000001",
+                "password": "navinajith",
+                "yearsOfExperience": 3,
+                "dateOfBirth": "1994-09-12",
+                "qualificationsId": [
+                    "bddf618f-dc3e-40d8-999e-e16eada27e72"
+                ]
+            }
+        ],
+        "edit": [
+            {
+                "id": "b6b861ff-f4c1-4266-ba2f-c9873bac1497",
+                "firstName": "Ajith",
+                "lastName": "Ram",
+                "email": "drpajithram@gmail.com",
+                "mobileNumber": "+917708827461",
+                "ranking": "1",
+                "registrationId": "DOC-000000001",
+                "yearsOfExperience": 3,
+                "qualifications": [
+                    {
+                        "id": "bddf618f-dc3e-40d8-999e-e16eada27e72"
+                    }
+                ]
+            }
+        ]
+    }
+}
