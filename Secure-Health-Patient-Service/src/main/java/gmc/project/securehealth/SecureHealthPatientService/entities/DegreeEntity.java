@@ -1,4 +1,4 @@
-package gmc.project.securehealth.SecureHealthAuthService.entities;
+package gmc.project.securehealth.SecureHealthPatientService.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -17,6 +18,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Entity
 @Table(name = "degrees")
 public class DegreeEntity implements Serializable {
 	

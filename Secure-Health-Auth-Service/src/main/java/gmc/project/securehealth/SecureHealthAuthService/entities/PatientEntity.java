@@ -2,19 +2,21 @@ package gmc.project.securehealth.SecureHealthAuthService.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "patients")
 public class PatientEntity implements Serializable {
@@ -37,5 +39,8 @@ public class PatientEntity implements Serializable {
 	private String encryptedPassword;
 	
 	private LocalDate dateOfBirth;
+	
+	@OneToMany(mappedBy = "patientRequested", cascade = CascadeType.REMOVE)
+	private Set<AppoinmentEntity> appoinments = new HashSet<>();
 
 }

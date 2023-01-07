@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -36,6 +38,7 @@ public class DiseaseEntity implements Serializable {
 
 	private String detailedDescription;
 
+	@Enumerated(value = EnumType.STRING)
 	private DiseaseType diseaseType;
 
 	@ManyToMany
