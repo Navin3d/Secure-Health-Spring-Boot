@@ -7,6 +7,24 @@
             "email": "naveenkumarpes2018@gmail.com",
             "password": "imsamantha",
             "dateOfBirthText": "2002-07-21"
+        },
+        {
+            "firstName": "Kaushik",
+            "lastName": "Singh",
+            "mobileNumber": "+916369543256",
+            "email": "kaushikmass@gmail.com",
+            "password": "imsamantha",
+            "dateOfBirthText": "2002-11-13"
+        }
+    ],
+    "appoinment": [
+        {
+            "summary": "Cosultation Regarding Cold",
+            "description": "Hello Doctor my daughter is suffering from cold for three days.",
+            "appoinmentTime": "09:30:00",
+            "appoinmentDate": "2023-01-08",
+            "doctorid": "c50e066e-9950-49fd-879d-f67b0a36d571",
+            "patientId": "15a56822-a613-4837-abdc-4ed0ecf6b736"
         }
     ],
     "disease": [
@@ -21,6 +39,12 @@
             "description": "The common cold is an infection of your nose and throat.",
             "detailedDescription": "More than 200 different viruses can cause colds. There’s no cure for a common cold, but it typically runs its course in a week to 10 days.",
             "diseaseType": "GENERALMEDICINE"
+        },
+        {
+            "title": "Rheumatoid arthritis",
+            "description": "Rheumatoid arthritis is a chronic inflammatory disorder that can affect more than just your joints.",
+            "detailedDescription": "An autoimmune disorder, rheumatoid arthritis occurs when your immune system mistakenly attacks your own body's tissues.",
+            "diseaseType": "RHEUMATOLOGY"
         }
     ],
     "degree": [
@@ -31,6 +55,16 @@
             "diseasesTreatable": [
                 {
                     "id": "7dd47e07-e215-4928-82e4-6b43d3bfdb8e"
+                }
+            ]
+        },
+        {
+            "title": "MD",
+            "specialization": "Rheumatology",
+            "description": "Doctor of Medicine",
+            "diseasesTreatable": [
+                {
+                    "id": "e24cff8d-8ac2-418d-a9a1-0f81b8d4ebb5"
                 }
             ]
         }

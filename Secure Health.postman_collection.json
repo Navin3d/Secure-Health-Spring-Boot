@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "3373dd4a-9ce1-4d60-ad0d-0b8b05cf8200",
+		"name": "Secure Health",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17195439"
+	},
+	"item": [
+		{
+			"name": "Doctor Service",
+			"item": [
+				{
+					"name": "Save Disease",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "GMC eyJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJHTUMiLCJleHAiOjE2NzM5NzYwMTgsInN1YiI6IkRPQy0wMDAwMDAwMDEifQ.k_Gh9mSKzWlUXc60agZiLqMIi82Yyyrd2GY2MBIT3wxwJtyumFqT2HkrGpj2QddG",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Rheumatoid arthritis\",\n    \"description\": \"Rheumatoid arthritis is a chronic inflammatory disorder that can affect more than just your joints.\",\n    \"detailedDescription\": \"An autoimmune disorder, rheumatoid arthritis occurs when your immune system mistakenly attacks your own body's tissues.\",\n    \"diseaseType\": \"RHEUMATOLOGY\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:8080/disease",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "8080",
+							"path": [
+								"disease"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Degree",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "GMC eyJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJHTUMiLCJleHAiOjE2NzM5NzYwMTgsInN1YiI6IkRPQy0wMDAwMDAwMDEifQ.k_Gh9mSKzWlUXc60agZiLqMIi82Yyyrd2GY2MBIT3wxwJtyumFqT2HkrGpj2QddG",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"MD\",\n    \"specialization\": \"Rheumatology\",\n    \"description\": \"Doctor of Medicine\",\n    \"diseasesTreatable\": [\n        {\n            \"id\": \"e24cff8d-8ac2-418d-a9a1-0f81b8d4ebb5\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:8080/degree",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "8080",
+							"path": [
+								"degree"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save Doctor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "GMC eyJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJHTUMiLCJleHAiOjE2NzM5NzYwMTgsInN1YiI6IkRPQy0wMDAwMDAwMDEifQ.k_Gh9mSKzWlUXc60agZiLqMIi82Yyyrd2GY2MBIT3wxwJtyumFqT2HkrGpj2QddG",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"c50e066e-9950-49fd-879d-f67b0a36d571\",\n    \"firstName\": \"Ajith\",\n    \"lastName\": \"Ram\",\n    \"email\": \"drpajithram@gmail.com\",\n    \"mobileNumber\": \"+917708827461\",\n    \"ranking\": \"1\",\n    \"registrationId\": \"DOC-000000001\",\n    \"yearsOfExperience\": 1,\n    \"qualifications\": [\n        {\n            \"id\": \"88843a24-d2eb-4e53-93fe-ce54908f864c\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:8080/doctor",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "8080",
+							"path": [
+								"doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Disease",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/disease/3559e735-579e-4693-9e8f-9a5a40fd6fca",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"disease",
+								"3559e735-579e-4693-9e8f-9a5a40fd6fca"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth Service",
+			"item": [
+				{
+					"name": "Register Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Ajith\",\n    \"lastName\": \"Ram\",\n    \"mobileNumber\": \"+917708827461\",\n    \"email\": \"drpajithram@gmail.com\",\n    \"registrationId\": \"DOC-000000001\",\n    \"password\": \"navinajith\",\n    \"yearsOfExperience\": 3,\n    \"dateOfBirth\": \"1994-09-12\",\n    \"qualificationsId\": [\n        \"88843a24-d2eb-4e53-93fe-ce54908f864c\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:49314/auth/register/doctor",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "49314",
+							"path": [
+								"auth",
+								"register",
+								"doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\": \"DOC-000000001\",\n    \"password\": \"navinajith\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Kaushik\",\n    \"lastName\": \"Singh\",\n    \"mobileNumber\": \"+916369543256\",\n    \"email\": \"kaushikmass@gmail.com\",\n    \"password\": \"imsamantha\",\n    \"dateOfBirthText\": \"2002-11-13\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:63030/auth/register/patient",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "63030",
+							"path": [
+								"auth",
+								"register",
+								"patient"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient Service",
+			"item": [
+				{
+					"name": "Book An Appoinment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"summary\": \"Cosultation Regarding Cold\",\n    \"description\": \"Hello Doctor my daughter is suffering from cold for three days.\",\n    \"appoinmentTime\": \"09:30:00\",\n    \"appoinmentDate\": \"2023-01-08\",\n    \"doctorid\": \"c50e066e-9950-49fd-879d-f67b0a36d571\",\n    \"patientId\": \"15a56822-a613-4837-abdc-4ed0ecf6b736\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:50163/appoinment",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "50163",
+							"path": [
+								"appoinment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Appoinment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"6bbeae54-382c-4356-9076-a90a2af2b26c\",\n    \"summary\": \"Cosultation Regarding Cold\",\n    \"description\": \"Hello Doctor my daughter is suffering from cold for three days.\",\n    \"noteByDoctor\": \"Don't worry Naveen she will be fine visit me by 12 Tomorrow!\",\n    \"appoinmentStatus\": \"ACCEPTED\",\n    \"appoinmentTime\": \"12:00:00\",\n    \"appoinmentDate\": \"2023-01-08\",\n    \"doctorid\": \"c50e066e-9950-49fd-879d-f67b0a36d571\",\n    \"patientId\": \"017ed9d7-2e29-478c-9342-ac4c8c2f3ea1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://navins-mbp.domain.name:64140/appoinment",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "64140",
+							"path": [
+								"appoinment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Patients",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "GMC eyJhbGciOiJIUzM4NCJ9.eyJpc3MiOiJHTUMiLCJleHAiOjE2NzM5NzYwMTgsInN1YiI6IkRPQy0wMDAwMDAwMDEifQ.k_Gh9mSKzWlUXc60agZiLqMIi82Yyyrd2GY2MBIT3wxwJtyumFqT2HkrGpj2QddG",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://navins-mbp.domain.name:8080/patient/15a56822-a613-4837-abdc-4ed0ecf6b736",
+							"protocol": "http",
+							"host": [
+								"navins-mbp",
+								"domain",
+								"name"
+							],
+							"port": "8080",
+							"path": [
+								"patient",
+								"15a56822-a613-4837-abdc-4ed0ecf6b736"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://navins-mbp.domain.name:50238"
+		}
+	]
+}
