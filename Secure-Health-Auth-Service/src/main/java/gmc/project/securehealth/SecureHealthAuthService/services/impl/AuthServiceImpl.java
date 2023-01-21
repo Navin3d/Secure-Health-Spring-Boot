@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
 	public DoctorModel findOneDoctorModel(String registrationId) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		DoctorModel returnValue = modelMapper.map(doctorDao.findByRegistrationId(registrationId), DoctorModel.class);
+		DoctorModel returnValue = modelMapper.map(doctorDao.findByRegistrationId(registrationId).get(), DoctorModel.class);
 		return returnValue;
 	}
 
@@ -65,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
 	public PatientModel findOnePatientModel(String mobileNumber) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		PatientModel returnValue = modelMapper.map(patientDao.findByMobileNumber(mobileNumber), PatientModel.class);
+		PatientModel returnValue = modelMapper.map(patientDao.findByMobileNumber(mobileNumber).get(), PatientModel.class);
 		return returnValue;
 	}
 

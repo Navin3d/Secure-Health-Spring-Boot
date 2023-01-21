@@ -70,25 +70,26 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		String userName = ((User)authResult.getPrincipal()).getUsername();
 		try {
 			PatientModel foundUser = authService.findOnePatientModel(userName);
+			String subject = "PAT-" + foundUser.getId();
 			String token = Jwts.builder()
 					.setIssuer(authConfig.getIssuer())
 					.setExpiration(new Date(System.currentTimeMillis() + authConfig.getExpeiry()))
-					.setSubject(userName)
+					.setSubject(subject)
 					.signWith(hmacKey)
 					.compact();
 			String refreshToken = Jwts.builder()
 					.setIssuer(authConfig.getIssuer())
 					.setExpiration(new Date(System.currentTimeMillis() + authConfig.getRefreshToken()))
-					.setSubject(userName)
+					.setSubject(subject)
 					.signWith(hmacKey)
 					.compact();
 			response.setHeader("Authorization", "GMC "+token);
 			response.setHeader("Refresh_Token", "GMC "+refreshToken);
-			response.setHeader("Patient_Id", foundUser.getId());
 		} catch(UsernameNotFoundException e) {
 			DoctorModel foundUser = authService.findOneDoctorModel(userName);
+			String subject = "DOC-" + foundUser.getId();
 			String token = Jwts.builder()
-					.setSubject(userName)
+					.setSubject(subject)
 					.setIssuer(authConfig.getIssuer())
 					.setExpiration(new Date(System.currentTimeMillis() + authConfig.getExpeiry()))
 					.signWith(hmacKey)
@@ -96,12 +97,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			String refreshToken = Jwts.builder()
 					.setIssuer(authConfig.getIssuer())
 					.setExpiration(new Date(System.currentTimeMillis() + authConfig.getRefreshToken()))
-					.setSubject(userName)
+					.setSubject(subject)
 					.signWith(hmacKey)
 					.compact();
 			response.setHeader("Authorization", "GMC "+token);
 			response.setHeader("Refresh_Token", "GMC "+refreshToken);
-			response.setHeader("Doctor_Id", foundUser.getId());
 		}
 	}
 
