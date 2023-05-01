@@ -24,7 +24,7 @@ public class DoctorController {
 	@Autowired
 	private DoctorService doctorService;
 
-	@GetMapping(path = "s")
+	@GetMapping
 	private ResponseEntity<List<DoctorCreationModel>> getAllDoctors() {
 		List<DoctorCreationModel> returnValue = doctorService.getAllDoctors();
 		return ResponseEntity.status(HttpStatus.OK).body(returnValue);

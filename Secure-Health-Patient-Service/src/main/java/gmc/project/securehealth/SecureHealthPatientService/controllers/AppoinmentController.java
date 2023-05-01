@@ -1,5 +1,7 @@
 package gmc.project.securehealth.SecureHealthPatientService.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,12 @@ public class AppoinmentController {
 
 	@Autowired
 	private AppoinmentService appoinmentService;
+	
+	@GetMapping(path = "/get/{userId}")
+	private ResponseEntity<List<AppoinmentModel>> getAllAppoinments(@PathVariable String userId) {
+		List<AppoinmentModel> returnValue = appoinmentService.getAllAppoinments(userId);
+		return ResponseEntity.status(HttpStatus.OK).body(returnValue);
+	}
 	
 	@GetMapping(path = "/{appoinmentId}")
 	private ResponseEntity<AppoinmentModel> getAAppoinment(@PathVariable String appoinmentId) {

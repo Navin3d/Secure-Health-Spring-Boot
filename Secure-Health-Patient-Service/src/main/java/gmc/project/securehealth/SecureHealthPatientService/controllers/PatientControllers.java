@@ -23,7 +23,7 @@ public class PatientControllers {
 	@Autowired
 	private PatientService patientService;
 	
-	@GetMapping(path = "s")
+	@GetMapping
 	private ResponseEntity<List<PatientModel>> getAllPatient(@PathVariable String patientId) {
 		List<PatientModel> returnValue = patientService.findAllPatient();
 		return ResponseEntity.status(HttpStatus.OK).body(returnValue);

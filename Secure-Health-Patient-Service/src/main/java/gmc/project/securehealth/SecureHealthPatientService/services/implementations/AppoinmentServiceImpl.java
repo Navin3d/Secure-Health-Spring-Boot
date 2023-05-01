@@ -1,5 +1,8 @@
 package gmc.project.securehealth.SecureHealthPatientService.services.implementations;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,21 @@ public class AppoinmentServiceImpl implements AppoinmentService {
 		AppoinmentEntity appoinmentEntity = findOne(appoinmentId);
 		AppoinmentModel returnVlaue = modelMapper.map(appoinmentEntity, AppoinmentModel.class);
 		return returnVlaue;
+	}
+	
+	@Override
+	public List<AppoinmentModel> getAllAppoinments(String userId) {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		List<AppoinmentModel> returnValue = new ArrayList<>();
+		List<AppoinmentEntity> allAppoinments = appoinmentDao.findAll();
+		allAppoinments.forEach(appoinment -> {
+			if(appoinment.getPatientRequested().getId().equals(userId))
+				returnValue.add(modelMapper.map(appoinment, AppoinmentModel.class));
+			if(appoinment.getHandledByDoctor().getId().equals(userId))
+				returnValue.add(modelMapper.map(appoinment, AppoinmentModel.class));
+		});
+		return returnValue;
 	}
 
 	@Override
