@@ -43,7 +43,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		log.debug("The Username given to the loadUserByUsername is: {}", username);
+		log.error("The Username given to the loadUserByUsername is: {}", username);
 		DoctorEntity foundDoctor = doctorDao.findByRegistrationId(username).orElse(null);
 		if (foundDoctor == null) {
 			PatientEntity foundPatient = patientDao.findByMobileNumber(username).orElse(null);
@@ -57,7 +57,9 @@ public class AuthServiceImpl implements AuthService {
 	public DoctorModel findOneDoctorModel(String registrationId) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		DoctorModel returnValue = modelMapper.map(doctorDao.findByRegistrationId(registrationId).get(), DoctorModel.class);
+		DoctorEntity detachedDoctor = doctorDao.findByRegistrationId(registrationId).orElse(null);
+		if(detachedDoctor == null) throw new UsernameNotFoundException(registrationId);
+		DoctorModel returnValue = modelMapper.map(detachedDoctor, DoctorModel.class);
 		return returnValue;
 	}
 
@@ -65,7 +67,9 @@ public class AuthServiceImpl implements AuthService {
 	public PatientModel findOnePatientModel(String mobileNumber) {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-		PatientModel returnValue = modelMapper.map(patientDao.findByMobileNumber(mobileNumber).get(), PatientModel.class);
+		PatientEntity foundPatient = patientDao.findByMobileNumber(mobileNumber).orElse(null);
+		if(foundPatient == null) throw new UsernameNotFoundException(mobileNumber);
+		PatientModel returnValue = modelMapper.map(foundPatient, PatientModel.class);
 		return returnValue;
 	}
 
