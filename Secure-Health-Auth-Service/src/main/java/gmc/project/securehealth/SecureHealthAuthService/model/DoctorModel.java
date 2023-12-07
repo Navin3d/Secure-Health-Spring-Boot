@@ -2,8 +2,6 @@ package gmc.project.securehealth.SecureHealthAuthService.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import lombok.Data;
 
@@ -23,9 +21,7 @@ public class DoctorModel implements Serializable {
 	private String email;
 	
 	private String registrationId;
-		
-	private List<DegreeModel> qualifications = new ArrayList<>();
-	
+
 	private Integer yearsOfExperience;
 		
 	private LocalDate dateOfBirth;

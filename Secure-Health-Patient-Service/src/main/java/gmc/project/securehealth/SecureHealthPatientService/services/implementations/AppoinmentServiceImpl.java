@@ -42,6 +42,8 @@ public class AppoinmentServiceImpl implements AppoinmentService {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		AppoinmentEntity appoinmentEntity = findOne(appoinmentId);
 		AppoinmentModel returnVlaue = modelMapper.map(appoinmentEntity, AppoinmentModel.class);
+		returnVlaue.setDoctorid(appoinmentEntity.getHandledByDoctor().getId());
+		returnVlaue.setPatientId(appoinmentEntity.getPatientRequested().getId());
 		return returnVlaue;
 	}
 	
@@ -52,10 +54,18 @@ public class AppoinmentServiceImpl implements AppoinmentService {
 		List<AppoinmentModel> returnValue = new ArrayList<>();
 		List<AppoinmentEntity> allAppoinments = appoinmentDao.findAll();
 		allAppoinments.forEach(appoinment -> {
-			if(appoinment.getPatientRequested().getId().equals(userId))
-				returnValue.add(modelMapper.map(appoinment, AppoinmentModel.class));
-			if(appoinment.getHandledByDoctor().getId().equals(userId))
-				returnValue.add(modelMapper.map(appoinment, AppoinmentModel.class));
+			if(appoinment.getPatientRequested().getId().equals(userId)) {
+				AppoinmentModel appoinmentModel = modelMapper.map(appoinment, AppoinmentModel.class);
+				appoinmentModel.setPatientId(appoinment.getPatientRequested().getId());
+				appoinmentModel.setDoctorid(appoinment.getHandledByDoctor().getId());
+				returnValue.add(appoinmentModel);
+			}
+			if(appoinment.getHandledByDoctor().getId().equals(userId)) {
+				AppoinmentModel appoinmentModel = modelMapper.map(appoinment, AppoinmentModel.class);
+				appoinmentModel.setPatientId(appoinment.getPatientRequested().getId());
+				appoinmentModel.setDoctorid(appoinment.getHandledByDoctor().getId());
+				returnValue.add(appoinmentModel);
+			}
 		});
 		return returnValue;
 	}
