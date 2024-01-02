@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,16 +32,20 @@ public class DoctorEntity implements Serializable {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	private String id;
 
+	@Column(unique = true)
 	private String ranking;
 
 	private String firstName;
 
 	private String lastName;
 
+	@Column(unique = true)
 	private String mobileNumber;
 
+	@Column(unique = true)
 	private String email;
 
+	@Column(unique = true)
 	private String registrationId;
 
 	private String encryptedPassword;
