@@ -1,8 +1,3 @@
-type Query {
-	doctors: [Doctor]
-	doctor(id: String): Doctor
-}
-
 type Doctor {
   id: String!
   ranking: String
@@ -14,5 +9,4 @@ type Doctor {
   yearsOfExperience: Int
   dateOfBirth: String
   qualifications: [Degree]!
-  appoinments: [Appoinment]!
 }

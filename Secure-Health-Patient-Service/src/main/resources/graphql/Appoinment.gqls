@@ -6,5 +6,5 @@ type Appoinment {
   appointmentStatus: String
   appointmentTime: String
   appointmentDate: String
-  patientRequested: Patient
+  handledByDoctor: Doctor
 }

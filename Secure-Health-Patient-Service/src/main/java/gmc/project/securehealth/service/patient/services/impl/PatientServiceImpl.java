@@ -20,7 +20,8 @@ public class PatientServiceImpl implements PatientService {
 	@Autowired
 	private PatientDao patientDao;
 	
-	private PatientEntity findOne(String uniqueId) {
+	@Override
+	public PatientEntity findOne(String uniqueId) {
 		PatientEntity returnValue;
 		if(uniqueId.contains("@")) {
 			returnValue = patientDao.findByEmail(uniqueId).orElse(null);
@@ -31,6 +32,11 @@ public class PatientServiceImpl implements PatientService {
 		}
 		if(returnValue == null) throw new PatientNotFoundException("Unique Id: " + uniqueId);
 		return returnValue;
+	}
+	
+	@Override
+	public List<PatientEntity> findAll() {
+		return patientDao.findAll();
 	}
 
 	@Override

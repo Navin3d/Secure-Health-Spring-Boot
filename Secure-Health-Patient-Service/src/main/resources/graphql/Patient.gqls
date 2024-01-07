@@ -1,3 +1,8 @@
+type Query {
+	patients: [Patient]
+	patient(id: String): Patient
+}
+
 type Patient {
   id: String!
   firstName: String!
@@ -5,4 +10,5 @@ type Patient {
   mobileNumber: String
   email: String
   dateOfBirth: String
+  appoinments: [Appoinment]!
 }
