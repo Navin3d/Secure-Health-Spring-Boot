@@ -1,0 +1,18 @@
+type Query {
+	doctors: [Doctor]
+	doctor(id: String): Doctor
+}
+
+type Doctor {
+  id: String!
+  ranking: String
+  firstName: String!
+  lastName: String!
+  mobileNumber: String
+  email: String
+  registrationId: String
+  yearsOfExperience: Int
+  dateOfBirth: String
+  qualifications: [Degree]!
+  appoinments: [Appoinment]!
+}

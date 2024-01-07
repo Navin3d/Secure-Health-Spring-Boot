@@ -1,0 +1,7 @@
+type Disease {
+  id: String!
+  title: String!
+  description: String!
+  detailedDescription: String!
+  diseaseType: String!
+}

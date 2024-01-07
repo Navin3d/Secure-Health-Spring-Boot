@@ -1,0 +1,10 @@
+type Appoinment {
+  id: String!
+  summary: String
+  description: String
+  noteByDoctor: String
+  appointmentStatus: String
+  appointmentTime: String
+  appointmentDate: String
+  patientRequested: Patient
+}

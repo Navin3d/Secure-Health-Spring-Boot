@@ -1,0 +1,8 @@
+type Patient {
+  id: String!
+  firstName: String!
+  lastName: String!
+  mobileNumber: String
+  email: String
+  dateOfBirth: String
+}

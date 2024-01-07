@@ -1,0 +1,7 @@
+type Degree {
+  id: String!
+  title: String!
+  specialization: String
+  description: String
+  diseasesTreatable: [Disease]!
+}
